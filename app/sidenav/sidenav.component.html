@@ -1,0 +1,32 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+        <ul *ngIf="project_type == 'Azure'">
+            <li  [routerLink] = "['webapp']" (click)="selectlist = 'webapp'" [ngClass]="{'select-list': selectlist == 'webapp'}">Create Web App</li>
+            <li  [routerLink] = "['apiapp']" (click)="selectlist = 'apiapp'" [ngClass]="{'select-list': selectlist == 'apiapp'}">Create API App</li>
+            <li  [routerLink] = "['funapp']" (click)="selectlist = 'funapp'" [ngClass]="{'select-list': selectlist == 'funapp'}">Create Function App</li>
+            <li  [routerLink] = "['genstorage']" (click)="selectlist = 'genstorage'" [ngClass]="{'select-list': selectlist == 'genstorage'}">Create General Storage</li>
+            <li  [routerLink] = "['storagecontain']" (click)="selectlist = 'storagecontain'" [ngClass]="{'select-list': selectlist == 'storagecontain'}">Create Storage Container</li>
+            <li  [routerLink] = "['applinsight']" (click)="selectlist = 'applinsight'" [ngClass]="{'select-list': selectlist == 'applinsight'}">Create Application Insight</li>
+            <li  [routerLink] = "['resgroup']" (click)="selectlist = 'resgroup'" [ngClass]="{'select-list': selectlist == 'resgroup'}">Create Resource Group</li>
+            <li  [routerLink] = "['sqlserinstance']" (click)="selectlist = 'sqlserinstance'" [ngClass]="{'select-list': selectlist == 'sqlserinstance'}">Create SQL Server Instance</li>
+            <li  [routerLink] = "['sqlserdb']" (click)="selectlist = 'sqlserdb'" [ngClass]="{'select-list': selectlist == 'sqlserdb'}">Create SQL Server Db</li>
+          </ul>
+          <ul *ngIf="project_type == 'AWS'">
+              <li>coming soon</li>
+            </ul>
+            <ul *ngIf="project_type == 'Google'">
+                <li [routerLink] = "['appengine']" (click)="selectlist = 'appengine'" [ngClass]="{'select-list': selectlist == 'appengine'}">Create App Engine (Web/API)</li>
+                <li [routerLink] = "['storagebucket']" (click)="selectlist = 'storagebucket'" [ngClass]="{'select-list': selectlist == 'storagebucket'}">Create Storage Bucket</li>
+                <li [routerLink] = "['sqlinstance']" (click)="selectlist = 'sqlinstance'" [ngClass]="{'select-list': selectlist == 'sqlinstance'}">Create SQL Instance</li>
+                <li [routerLink] = "['sqldatabase']" (click)="selectlist = 'sqldatabase'" [ngClass]="{'select-list': selectlist == 'sqldatabase'}">Create SQL Database</li>
+              </ul>
+    </mat-sidenav>
+  
+    <mat-sidenav-content fxLayout="row">
+      <p fxFlex="4"><button (click)="sidenav.toggle()" mat-flat-button color="primary" style="min-width: 37px;padding: 0;border-radius: 0 4px 4px 0px;"><mat-icon>list</mat-icon></button></p>
+      <div class="example-events" fxFlex>
+          <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

@@ -1,0 +1,35 @@
+.example-container {
+    position: absolute;
+    top: 63px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .example-events {
+   
+  }
+  
+  mat-sidenav {
+    width: 264px;
+    padding: 18px 0;
+  }
+  .example-container ul{
+    padding: 0 21px;
+  }
+  .example-container ul li {
+    list-style: none;
+    padding: 8px 15px 8px 15px;
+    cursor:pointer;
+    color: blue;
+}
+.example-container ul li:hover {
+    color: #fff;
+    background: black;
+    border-radius: 3px;
+}
+.example-container ul .select-list {
+  color: #fff;
+  background: black;
+  border-radius: 3px;
+}

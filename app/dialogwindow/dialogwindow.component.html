@@ -1,0 +1,24 @@
+<h1 mat-dialog-title> List of Projects</h1>
+<div mat-dialog-content>
+    <table>
+        <tr>
+          <th>Selection</th>
+          <th>Project Name</th>
+          <th>Project Description</th>
+        </tr>
+        <tr *ngFor="let data of data">
+          <td>
+              <mat-radio-group aria-label="Select an option" [(ngModel)]="listprojects"  name="list_projects"
+               #list_projects="ngModel">
+                  <mat-radio-button [value]='data'></mat-radio-button>
+                </mat-radio-group>
+          </td>
+          <td>{{data.project_name}}</td>
+          <td>{{data.Project_Description}}</td>
+        </tr>
+      </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="listprojects" cdkFocusInitial>Ok</button>
+</div>

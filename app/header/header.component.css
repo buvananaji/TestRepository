@@ -1,0 +1,25 @@
+#header {
+    height: 57px;
+    padding-top: 6px;
+    background-color: #70bbe0;
+    /* color: #fff; */
+}
+#header .user-name{
+    position: relative;
+    top: 41px;
+    left: 60px;
+    transform: translate(-50%,-50%);
+}
+#header img.user-logo {
+    border-radius: 50%;
+}
+#header .activities{
+    position: relative;
+    top: 36px;
+    left: 19px;
+    transform: translate(-50%,-50%);
+}
+#header .title{
+    margin-top: 14px;
+    font-weight: bold;
+}

@@ -1,0 +1,191 @@
+<div class="home">
+  <div fxLayout="row">
+      <div fxFlex="58">
+          <label>Select Project Type</label>
+      </div>
+      <div fxFlex="2">
+
+      </div>
+      <div fxFlex>
+          <mat-radio-group aria-label="Select an option" [(ngModel)]="projectDetails.project_type">
+              <mat-radio-button value="New Project">New Project</mat-radio-button>
+              <mat-radio-button value="Existing Project">Existing Project</mat-radio-button>
+            </mat-radio-group>
+      </div>
+  </div>
+  <div *ngIf="projectDetails.project_type == 'New Project'">
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <div fxLayout="row">
+      <div fxFlex="58">
+          <label class="project-name">Project Name</label>
+      </div>
+      <div fxFlex="2">
+
+        </div>
+        <div fxFlex>
+        <mat-form-field class="full-width">
+          <input matInput [(ngModel)]="projectDetails.project_name" name="project_name" #project_name="ngModel" required />
+        </mat-form-field>
+        <div *ngIf="f.submitted && project_name.invalid" class="error">
+                <div *ngIf="project_name.errors.required">Project Name is required</div>
+            </div>
+      </div>
+  </div>
+  <div fxLayout="row">
+      <div fxFlex="58">
+          <label class="project-name">Project Description</label>
+      </div>
+      <div fxFlex="2">
+
+        </div>
+        <div fxFlex>
+      <mat-form-field class="full-width">
+          <input matInput name="project_description" #project_description="ngModel"  [(ngModel)]="projectDetails.project_description" required>
+        </mat-form-field>
+        <div *ngIf="f.submitted && project_description.invalid" class="error">
+                <div *ngIf="project_description.errors.required">Project Description is required</div>
+            </div>
+      </div>
+  </div>
+  <div fxLayout="row" class="types">
+      <div fxFlex="58">
+          <label>Select Cloud Providers of the project </label>
+      </div>
+      <div fxFlex="2">
+
+      </div>
+      <div fxFlex>
+          <mat-checkbox class="example-margin" name="aws_provider"  #aws_provider="ngModel"  [(ngModel)]="projectDetails.aws_provider">AWS</mat-checkbox>
+         <mat-checkbox class="example-margin" name="azure_provider"   #azure_provider="ngModel"  [(ngModel)]="projectDetails.azure_provider">Azure</mat-checkbox>
+         <mat-checkbox class="example-margin" name="google_provider"  #google_provider="ngModel"  [(ngModel)]="projectDetails.google_provider">Google</mat-checkbox>
+         <div *ngIf="f.submitted && (projectDetails.aws_provider != true && projectDetails.azure_provider != true && projectDetails.google_provider != true)" 
+         class="error cloud-provider">
+            Minimum of one cloud Provider is required
+            </div>
+      </div>
+  </div>
+  <div fxLayout="row" class="types">
+      <div fxFlex="58">
+          <label>Select Current Resource Provisioning Screen to Work on</label>
+      </div>
+      <div fxFlex="2">
+
+      </div>
+      <div fxFlex>
+            <mat-radio-group aria-label="Select an option" name="current_resource_provision" #current_resource_provision="ngModel" [(ngModel)]="projectDetails.current_resource_provision">
+                    <mat-radio-button value="AWS">AWS</mat-radio-button>
+                    <mat-radio-button value="Azure">Azure</mat-radio-button>
+                    <mat-radio-button value="Google">Google</mat-radio-button>
+                  </mat-radio-group>
+      </div>
+  </div>
+  <div fxLayout="row">
+      <div fxFlex="58">
+          <label class="project-name">Select Cloud Subscription</label>
+      </div>
+      <div fxFlex="2">
+
+      </div>
+      <div fxFlex>
+          <mat-form-field class="full-width">
+              <mat-select  [(ngModel)]="projectDetails.cloud_subscription"  name="cloud_subscription" #cloud_subscription="ngModel" >
+                    <mat-option *ngFor="let sub of cloudCubscription" [value]="sub">
+                            {{sub}}
+                          </mat-option>
+              </mat-select>
+            </mat-form-field>
+      </div>
+  </div>
+  <div fxLayout="row">
+      <div fxFlex="58">
+          <label class="project-name">Select Script Generation Format</label>
+      </div>
+      <div fxFlex="2">
+
+      </div>
+      <div fxFlex>
+          <mat-form-field class="full-width">
+                <mat-select [(ngModel)]="projectDetails.script_generation" name="script_generation" #script_generation="ngModel">
+                        <mat-option value="Terraform Scripts">Terraform Scripts</mat-option>
+                        <mat-option  *ngIf="projectDetails.current_resource_provision == 'AWS'" value="Terraform Scripts">Cloud formation template</mat-option>
+                        <mat-option  *ngIf="projectDetails.current_resource_provision == 'Azure'"  value="Terraform Scripts">ARM Templates</mat-option>
+                        <mat-option  *ngIf="projectDetails.current_resource_provision == 'Google'"  value="Terraform Scripts">Google Rest API</mat-option>
+                  </mat-select>
+        </mat-form-field>
+      </div>
+  </div>
+  <button mat-raised-button color="primary">Next</button>
+</form>
+</div>
+<div *ngIf="projectDetails.project_type == 'Existing Project'">
+        <form name="form1" (ngSubmit)="f.form.valid && existNext()" #f="ngForm" novalidate>
+                <div fxLayout="row">
+                        <div fxFlex="58">
+                            <label class="project-name">Select/Enter Project Name</label>
+                        </div>
+                        <div fxFlex="2">
+                  
+                          </div>
+                          <div fxFlex="27">
+                        <mat-form-field class="full-width">
+                            <input matInput name="Exist_project_name" #Exist_project_name="ngModel"  [(ngModel)]="exist_project_details.exist_project_name" required>
+                          </mat-form-field>
+                          <div *ngIf="f.submitted && Exist_project_name.invalid" class="error">
+                                  <div *ngIf="Exist_project_name.errors.required">Project Name is required</div>
+                              </div>
+                        </div>
+                        <div fxFlex="1">
+                            </div>
+                            <div fxFlex>
+                               <mat-icon style="margin: 17px 0px;cursor: pointer" (click)="openDialog()">playlist_add</mat-icon>
+                                </div>
+                    </div>   
+                    <div fxLayout="row" class="types">
+                            <div fxFlex="58">
+                                <label>Select Choices of Cloud Provder(s)  </label>
+                            </div>
+                            <div fxFlex="2">
+                      
+                            </div>
+                            <div fxFlex>
+                                <mat-checkbox class="example-margin" name="exist_aws_provider"  #exist_aws_provider="ngModel"  [(ngModel)]="exist_project_details.exist_aws_provider">AWS</mat-checkbox>
+                               <mat-checkbox class="example-margin" name="exist_azure_provider"   #exist_azure_provider="ngModel"  [(ngModel)]="exist_project_details.exist_azure_provider">Azure</mat-checkbox>
+                               <mat-checkbox class="example-margin" name="exist_google_provider"  #exist_google_provider="ngModel"  [(ngModel)]="exist_project_details.exist_google_provider">Google</mat-checkbox>
+                               <div *ngIf="f.submitted && (exist_project_details.exist_aws_provider != true && exist_project_details.exist_azure_provider != true && exist_project_details.exist_google_provider != true)" 
+                               class="error cloud-provider">
+                                  Minimum of one cloud Provider is required
+                                  </div>
+                            </div> 
+                    </div>  
+                    <div fxLayout="row" class="types">
+                            <div fxFlex="58">
+                                <label>Select Additional Choices Cloud Provder(s)  </label>
+                            </div>
+                            <div fxFlex="2">
+                      
+                            </div>
+                            <div fxFlex>
+                                <mat-checkbox class="example-margin" name="add_exist_aws_provider"  #add_exist_aws_provider="ngModel"  [(ngModel)]="exist_project_details.add_exist_aws_provider">AWS</mat-checkbox>
+                               <mat-checkbox class="example-margin" name="add_exist_azure_provider"   #add_exist_azure_provider="ngModel"  [(ngModel)]="exist_project_details.add_exist_azure_provider">Azure</mat-checkbox>
+                               <mat-checkbox class="example-margin" name="add_exist_google_provider"  #add_exist_google_provider="ngModel"  [(ngModel)]="exist_project_details.add_exist_google_provider">Google</mat-checkbox>
+                            </div> 
+                    </div> 
+                    <div fxLayout="row">
+                            <div fxFlex="58">
+                                <label >Select Current Resource Provisioning Screen</label>
+                            </div>
+                            <div fxFlex="2">
+                      
+                            </div>
+                            <div fxFlex>
+                                    <mat-radio-group aria-label="Select an option" [(ngModel)]="exist_project_details.exist_current_resource"  name="exist_current_resource" #exist_current_resource="ngModel">
+                                            <mat-radio-button value="AWS">AWS</mat-radio-button>
+                                            <mat-radio-button value="Azure">Azure</mat-radio-button>
+                                            <mat-radio-button value="Google">Google</mat-radio-button>
+                                          </mat-radio-group>
+                            </div>
+                        </div> 
+                        <button mat-raised-button color="primary">Next</button>
+        </form>
+</div>
+</div>

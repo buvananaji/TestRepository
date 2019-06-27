@@ -1,0 +1,23 @@
+.home {
+    margin: 0 auto;
+    width: 66%;
+}
+.home mat-radio-button {
+    margin: 0 11px 0 0;
+}
+.home .project-name{
+    position: relative;
+    top: 30px;
+}
+.home mat-checkbox {
+    margin-right: 20px;
+}
+.home .types{
+    margin: 22px 0;
+}
+.home button.mat-raised-button.mat-primary {
+    float: right;
+}
+.home .cloud-provider{
+    margin-top: 16px;
+}
